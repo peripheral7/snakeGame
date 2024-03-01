@@ -48,7 +48,7 @@ public:
 			int x = body[i].x;
 			int y = body[i].y;
 			Rectangle segment = Rectangle{ (float)offset + x * cellSize, (float)offset + y * cellSize, (float)cellSize, (float)cellSize };
-			DrawRectangleRounded(segment, 0.5, 6, darkGreen);
+			DrawRectangleRounded(segment, 0.2, 6, darkGreen);
 		}
 	}
 
@@ -119,7 +119,7 @@ public:
 	Game() {
 		InitAudioDevice();
 		eatSound = LoadSound("Sounds/eat.mp3");
-		wallSound = LoadSound("Sounds/wall.mp3");
+		wallSound = LoadSound("Sounds/death.mp3");
 	}
 
 	~Game() {
@@ -170,11 +170,11 @@ public:
 	}
 
 	void GameOver() {
+		PlaySound(wallSound);
 		snake.Reset();
 		food.position = food.GenerateRandomPos(snake.body);
 		running = false;
 		score = 0;
-		PlaySound(wallSound);
 	}
 };
 
